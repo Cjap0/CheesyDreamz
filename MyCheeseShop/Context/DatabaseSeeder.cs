@@ -52,7 +52,7 @@ namespace MyCheeseShop.Context
         private List<Cheese> GetCheeses()
         {
             // Create a list to store Cheese objects
-            List<Cheese> cheeses =
+            return
             [
                 // Create 20 instances of Cheese using object initializers
                 new Cheese { Name = "Cheddar", Type = "Hard", Description = "Sharp and tangy", Strength = "Medium", Price = 7.99m },
@@ -76,8 +76,6 @@ namespace MyCheeseShop.Context
                 new Cheese { Name = "Edam", Type = "Semi-hard", Description = "Mild and nutty", Strength = "Mild", Price = 8.99m },
                 new Cheese { Name = "Ricotta", Type = "Soft", Description = "Creamy and slightly sweet", Strength = "Mild", Price = 7.49m },
             ];
-
-            return cheeses;
         }
 
     }

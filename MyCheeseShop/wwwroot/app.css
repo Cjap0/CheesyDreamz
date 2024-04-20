@@ -20,6 +20,7 @@ h1:focus {
     color: white;
 }
 
+
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
@@ -27,3 +28,4 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+

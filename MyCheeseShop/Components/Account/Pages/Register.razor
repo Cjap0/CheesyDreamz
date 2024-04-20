@@ -18,30 +18,50 @@
 <PageTitle>Register</PageTitle>
 <StatusMessage Message="@statusMessage" IsError="@isError" />
 
-<div class="card">
-    <div class="card-body bg-light">
-        <h4 class="card-title">Register</h4>
-
-        <EditForm OnValidSubmit="RegisterUser" Model="Model" FormName="registerForm">
-            <div class="row g-3">
-                <div class="col-md-12">
-                    <label for="email" class="form-label">Email</label>
-                    <InputText class="form-control" placeholder="Email" @bind-Value="Model.Email" />
-                </div>
-                <div class="col-md-6">
-                    <label for="password" class="form-label">Password</label>
-                    <InputText type="password" class="form-control" placeholder="Password" @bind-Value="Model.Password" />
-                </div>
-                <div class="col-md-6">
-                    <label for="name" class="form-label">Confirm Password</label>
-                    <InputText type="password" class="form-control" placeholder="Confirm Password" @bind-Value="Model.ConfirmPassword" />
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100">Register</button>
-                </div>
-            </div>
-        </EditForm>
-    </div>
+<div class="register-box">
+    <link rel="stylesheet" href="register.css">
+    <h2>Register</h2>
+    <form>
+        <div class="user-box">
+            <input type="text" name="" required="">
+            <label>FirstName</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="" required="">
+            <label>LastName</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="" required="">
+            <label>Address</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="" required="">
+            <label>City</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="" required="">
+            <label>PostCode</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="" required="">
+            <label>Email</label>
+        </div>
+        <div class="user-box">
+            <input type="password" name="" required="">
+            <label>Password</label>
+        </div>
+        <div class="user-box">
+            <input type="password" name="" required="">
+            <label>Confirm Password</label>
+        </div>
+        <a href="#">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Submit
+        </a>
+    </form>
 </div>
 
 @code {
@@ -58,11 +78,19 @@
 
     public async Task RegisterUser(EditContext editContext)
     {
-        var user = Activator.CreateInstance<User>(); ;
-        await UserStore.SetUserNameAsync(user, Model.Email, CancellationToken.None);
-        var emailStore = (IUserEmailStore<User>)UserStore;
-        await emailStore.SetEmailAsync(user, Model.Email, CancellationToken.None);
-        var result = await UserManager.CreateAsync(user, Model.Password);
+        var user = new User
+            {
+                UserName = Model.Email,
+                Email = Model.Email,
+                FirstName = Model.FirstName,
+                LastName = Model.LastName,
+                Address = Model.Address,
+                City = Model.City,
+                PostCode = Model.PostCode
+            };
+
+            var result = await UserManager.CreateAsync(user, Model.Password);
+            await UserManager.AddToRoleAsync(user, "Customer");
 
         if (!result.Succeeded)
         {
@@ -81,10 +109,32 @@
 
     private sealed class RegisterModel
     {
+        [Required(ErrorMessage = "Please enter your email.")]
+        [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
         public string Email { get; set; } = "";
 
+        [Required(ErrorMessage = "Please enter your email.")]
+        [DataType(DataType.Password)]
         public string Password { get; set; } = "";
 
+        [Required(ErrorMessage = "Please enter your email.")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; } = "";
+
+        [Required(ErrorMessage = "Please enter your first name.")]
+        public string FirstName { get; set; } = "";
+
+        [Required(ErrorMessage = "Please enter your last name.")]
+        public string LastName { get; set; } = "";
+
+        [Required(ErrorMessage = "Please enter your address.")]
+        public string Address { get; set; } = "";
+
+        [Required(ErrorMessage = "Please enter your city")]
+        public string City { get; set; } = "";
+
+        [Required(ErrorMessage = "Please enter your post code.")]
+        public string PostCode { get; set; } = "";
     }
 }
