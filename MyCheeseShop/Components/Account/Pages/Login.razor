@@ -18,19 +18,19 @@
     <h2>Login</h2>
     <form>
         <div class="user-box">
-            <input type="text" name="" required="">
-            <label>Email</label>
+            <label for="email"></label>
+            <InputText id="email" @bind-Value="Model.Email" class="form-control" placeholder="Email" />
         </div>
         <div class="user-box">
-            <input type="password" name="" required="">
-            <label>Password</label>
+            <label for="password"></label>
+            <InputText id="password" type="password" @bind-Value="Model.Password" class="form-control" placeholder="Password" />
         </div>
         <a href="#">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            Submit
+            Login
         </a>
     </form>
 </div>

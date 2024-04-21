@@ -23,43 +23,43 @@
     <h2>Register</h2>
     <form>
         <div class="user-box">
-            <input type="text" name="" required="">
-            <label>FirstName</label>
+            <label for="firstname"></label>
+            <InputText id="firstname" class="form-control" placeholder="First Name" @bind-Value="Model.FirstName" />
         </div>
         <div class="user-box">
-            <input type="text" name="" required="">
-            <label>LastName</label>
+            <label for="lastname"></label>
+            <InputText id="lastname" class="form-control" placeholder="Last Name" @bind-Value="Model.LastName" />
         </div>
         <div class="user-box">
-            <input type="text" name="" required="">
-            <label>Address</label>
+            <label for="address"></label>
+            <InputText id="address" class="form-control" placeholder="Address" @bind-Value="Model.Address" />
         </div>
         <div class="user-box">
-            <input type="text" name="" required="">
-            <label>City</label>
+            <label for="city"></label>
+            <InputText id="city" class="form-control" placeholder="City" @bind-Value="Model.City" />
         </div>
         <div class="user-box">
-            <input type="text" name="" required="">
-            <label>PostCode</label>
+            <label for="postcode"></label>
+            <InputText id="postcode" class="form-control" placeholder="Post Code" @bind-Value="Model.PostCode" />
         </div>
         <div class="user-box">
-            <input type="text" name="" required="">
-            <label>Email</label>
+            <label for="email"></label>
+            <InputText id="email" class="form-control" placeholder="Email" @bind-Value="Model.Email" />
         </div>
         <div class="user-box">
-            <input type="password" name="" required="">
-            <label>Password</label>
+            <label for="password"></label>
+            <InputText id="password" type="password" class="form-control" placeholder="Password" @bind-Value="Model.Password" />
         </div>
         <div class="user-box">
-            <input type="password" name="" required="">
-            <label>Confirm Password</label>
+            <label for="confirm"></label>
+            <InputText id="confirm" type="password" class="form-control" placeholder="Confirm Password" @bind-Value="Model.ConfirmPassword" />
         </div>
         <a href="#">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            Submit
+            Register
         </a>
     </form>
 </div>
@@ -89,8 +89,8 @@
                 PostCode = Model.PostCode
             };
 
-            var result = await UserManager.CreateAsync(user, Model.Password);
-            await UserManager.AddToRoleAsync(user, "Customer");
+            
+        var result = await UserManager.CreateAsync(user, Model.Password);        
 
         if (!result.Succeeded)
         {
@@ -98,7 +98,7 @@
             isError = true;
             return;
         }
-
+        await UserManager.AddToRoleAsync(user, "Customer");
         Logger.LogInformation("User created a new account with password.");
 
         var userId = await UserManager.GetUserIdAsync(user);
