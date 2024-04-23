@@ -6,7 +6,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: linear-gradient(109.6deg, rgb(255, 230, 109) 11.2%, rgb(87, 232, 107) 100.2%);
+    background-image: url("https://www.realsimple.com/thmb/uIJ_VB-o5bVwuzaaEV6c5h_bXkM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/types-of-cheeses-2000-0dbfa6a010134a05936b784517486bb2.jpg");
+    background-color: #cccccc;
 }
 
 .login-box {

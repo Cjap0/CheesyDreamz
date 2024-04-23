@@ -37,7 +37,9 @@ builder.Services.AddIdentityCore<User>()
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddSignInManager();
 
+builder.Services.AddScoped<CheeseProvider>();
 builder.Services.AddScoped<DatabaseSeeder>();
+
 
 var app = builder.Build();
 

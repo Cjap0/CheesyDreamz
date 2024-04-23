@@ -1,3 +1,22 @@
 ﻿@page "/"
+@inject CheeseProvider CheeseProvider
+@using MyCheeseShop.Model;
 
+@if (cheeses is null)
+{
+    <p>Loading...</p>
+}
+else if (!cheeses.Any())
+{
+    <p> No cheeses found</p>
+}
 
+@code{
+    private IEnumerable<Cheese> cheeses;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cheeses = await CheeseProvider.GetAllCheesesAsync();
+    }
+
+}
