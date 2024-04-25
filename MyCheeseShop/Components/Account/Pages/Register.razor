@@ -18,50 +18,30 @@
 <PageTitle>Register</PageTitle>
 <StatusMessage Message="@statusMessage" IsError="@isError" />
 
-<div class="register-box">
-    <link rel="stylesheet" href="register.css">
-    <h2>Register</h2>
-    <form>
-        <div class="user-box">
-            <label for="firstname"></label>
-            <InputText id="firstname" class="form-control" placeholder="First Name" @bind-Value="Model.FirstName" />
-        </div>
-        <div class="user-box">
-            <label for="lastname"></label>
-            <InputText id="lastname" class="form-control" placeholder="Last Name" @bind-Value="Model.LastName" />
-        </div>
-        <div class="user-box">
-            <label for="address"></label>
-            <InputText id="address" class="form-control" placeholder="Address" @bind-Value="Model.Address" />
-        </div>
-        <div class="user-box">
-            <label for="city"></label>
-            <InputText id="city" class="form-control" placeholder="City" @bind-Value="Model.City" />
-        </div>
-        <div class="user-box">
-            <label for="postcode"></label>
-            <InputText id="postcode" class="form-control" placeholder="Post Code" @bind-Value="Model.PostCode" />
-        </div>
-        <div class="user-box">
-            <label for="email"></label>
-            <InputText id="email" class="form-control" placeholder="Email" @bind-Value="Model.Email" />
-        </div>
-        <div class="user-box">
-            <label for="password"></label>
-            <InputText id="password" type="password" class="form-control" placeholder="Password" @bind-Value="Model.Password" />
-        </div>
-        <div class="user-box">
-            <label for="confirm"></label>
-            <InputText id="confirm" type="password" class="form-control" placeholder="Confirm Password" @bind-Value="Model.ConfirmPassword" />
-        </div>
-        <a href="#">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Register
-        </a>
-    </form>
+<div class="card">
+    <div class="card-body bg-light">
+        <h4 class="card-title">Register</h4>
+
+        <EditForm OnValidSubmit="RegisterUser" Model="Model" FormName="registerForm">
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <label for="email" class="form-label">Email</label>
+                    <InputText class="form-control" placeholder="Email" @bind-Value="Model.Email" />
+                </div>
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Password</label>
+                    <InputText type="password" class="form-control" placeholder="Password" @bind-Value="Model.Password" />
+                </div>
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Confirm Password</label>
+                    <InputText type="password" class="form-control" placeholder="Confirm Password" @bind-Value="Model.ConfirmPassword" />
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
 </div>
 
 @code {
