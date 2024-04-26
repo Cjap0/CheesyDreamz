@@ -65,4 +65,8 @@ else if (!cheeses.Any())
             || cheese.Strength.Contains(searchTerm, StringComparison.OrdinalIgnoreCase);
     }
 
+    private void GoToCart()
+    {
+        NavigationManager.NavigateTo("/cart");
+    }
 }
