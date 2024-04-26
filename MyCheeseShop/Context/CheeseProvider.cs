@@ -13,7 +13,8 @@ public class CheeseProvider
 
     public async Task<List<Cheese>> GetAllCheesesAsync()
     {
-        return await _context.Cheeses.OrderBy(cheese  => cheese.Name).ToListAsync();
+       var cheeses =  await _context.Cheeses.OrderBy(cheese  => cheese.Name).ToListAsync();
+        return cheeses;
     }
 
     public Cheese? GetCheese(int id)

@@ -1,12 +1,22 @@
-﻿<h3>StoreItem</h3>
-@using MyCheeseShop.Model;
+﻿@using MyCheeseShop.Model;
 
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
+<div class="card mb-3" style="width: 18rem;">
+    <link rel="stylesheet" href="Store.css">
+    <img src="/Img/Cheeses/@Cheese.ImageUrl" class="card-img-top" alt="...">
     <div class="card-body">
-        <h5 class="card-title">@Cheese.Name</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Add to Cart</a>
+        <span class="badge rounded-pill text-bg-primary">@Cheese.Type</span> <span class="badge rounded-pill text-bg-danger"> @Cheese.Strength</span>
+        
+        <h5 class="card-title">@Cheese.Name £@Cheese.Price</h5>
+        <p class="card-text">@Cheese.Description</p>
+        <a href="#" class="btn btn-success">Add to Cart</a>
+        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Quantity
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">100g</a></li>
+            <li><a class="dropdown-item" href="#">200g</a></li>
+            <li><a class="dropdown-item" href="#">300g</a></li>
+        </ul>
     </div>
 </div>
 
