@@ -29,5 +29,11 @@
             //return a copy of the items in the cart
             return _items;
         }
+
+        public int Count()
+        {
+            // return the number of items in the cart
+            return _items.Count;
+        }
     }
 }

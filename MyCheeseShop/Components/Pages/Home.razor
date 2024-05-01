@@ -2,9 +2,12 @@
 @inject CheeseProvider CheeseProvider
 @inject NavigationManager NavigationManager
 @inject ShoppingCart ShoppingCart
-@using MyCheeseShop.Components.Account.Shared
+@using MyCheeseShop.Components.Shared
 @using MyCheeseShop.Model;
 
+<div class="d-flex justify-content-end mt-2 mt-md-0">
+    <a @onclick="GoToCart" class="btn btn-outline-primary">🛒 Cart (@ShoppingCart.Count())</a>
+</div>
 
 @if (cheeses is null)
 {
@@ -65,4 +68,8 @@ else if (!cheeses.Any())
             || cheese.Strength.Contains(searchTerm, StringComparison.OrdinalIgnoreCase);
     }
 
+    private void GoToCart()
+    {
+        NavigationManager.NavigateTo("/cart");
+    }
 }

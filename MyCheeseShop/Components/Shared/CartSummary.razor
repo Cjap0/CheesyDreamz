@@ -1,0 +1,54 @@
+﻿@inject NavigationManager NavigationManager
+@inject ShoppingCart ShoppingCart
+@inject ProtectedSessionStorage ProtectedSessionStore
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using MyCheeseShop.Model
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+
+@code {
+    [Parameter]
+    public bool IsEditable { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        ShoppingCart.OnCartUpdated += async () => await CartUpdated();
+    }
+
+    private async Task CartUpdated()
+    {
+        StateHasChanged();
+        await ProtectedSessionStore.SetAsync("cart", ShoppingCart.GetItems());
+    }
+
+    
+}
