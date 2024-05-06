@@ -19,4 +19,10 @@
     <Folder Include="wwwroot\database\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Components\Shared\CartSummary.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
 </Project>

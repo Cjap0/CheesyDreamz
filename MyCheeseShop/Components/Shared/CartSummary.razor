@@ -1,38 +1,54 @@
-﻿@inject NavigationManager NavigationManager
-@inject ShoppingCart ShoppingCart
-@inject ProtectedSessionStorage ProtectedSessionStore
-@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+﻿@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using MyCheeseShop.Model
+@inject ShoppingCart ShoppingCart
+@inject NavigationManager NavigationManager
+@inject ProtectedSessionStorage ProtectedSessionStore
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+<link rel="stylesheet" href="CartSummary.css">
+<div>
+    <table class="table" style="vertical-align: middle; border-radius: 10px; overflow: hidden;">
+        <link rel="stylesheet" href="CartSummary.css">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                @if (IsEditable)
+                {
+                    <th scope="col">Actions</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ShoppingCart.GetItems())
+            {
+                <tr>
+                    <td scope="col">@item.Cheese.Name</td>
+                    <td scope="col">@item.Cheese.Price.ToString("C")</td>
+                    <td scope="col">@(item.Quantity * 100)g</td>
+                    <td scope="col">@item.Total.ToString("C")</td>
+                    @if (IsEditable)
+                    {
+                        <td scope="col">
+                            <button class="btn btn-outline-success mt-1 mt-md-0" @onclick="() => IncreaseQuantity(item)">＋</button>
+                            <button class="btn btn-outline-primary mt-1 mt-md-0" @onclick="() => DecreaseQuantity(item)">－</button>
+                            <button class="btn btn-outline-danger mt-1 mt-md-0" @onclick="() => RemoveItem(item)">❌</button>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="d-flex justify-content-between">
+    <div>
+        <button @onclick="GoToStore" class="btn btn-dark">Back to store</button>
+    </div>
+    <div>
+        <h4 class="badge rounded-pill bg-danger" style="font-size: 20px; text-align: center; font-family: sans-serif">&nbsp;Total: @(ShoppingCart.Total().ToString("C"))</h4>
+    </div>
+</div>
 
 
 @code {
@@ -50,7 +66,7 @@
         await ProtectedSessionStore.SetAsync("cart", ShoppingCart.GetItems());
     }
 
-    private void RemoveItem (CartItem item)
+    private void RemoveItem(CartItem item)
     {
         ShoppingCart.RemoveItem(item.Cheese);
     }
@@ -64,4 +80,11 @@
     {
         ShoppingCart.RemoveItem(item.Cheese, 1);
     }
+
+    private void GoToStore()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+  
 }

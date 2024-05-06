@@ -1,9 +1,34 @@
 ﻿@page "/cart"
 @inject ShoppingCart ShoppingCart
 @inject NavigationManager NavigationManager
+@inject CheeseProvider CheeseProvider
 @using MyCheeseShop.Model
+@using MyCheeseShop.Components.Shared
+@using MyCheeseShop.Context
 
-<a @onclick="GoToCheckout" class="btn btn-outline-primary"> Checkout </a>
+<PageTitle>Cart - CheesyDreamz</PageTitle>
+
+@if (ShoppingCart.Count() == 0)
+{
+    <h3>Shopping Cart</h3>
+    <p>Your cart is empty</p>
+    <div>
+        <button @onclick="GoToStore" class="btn btn-dark">Continue shopping</button>
+    </div>
+}
+else
+{
+    <div class="d-flex justify-content-between">
+        <div>
+            <h3>Shopping Cart</h3>
+        </div>
+        <div>
+            <a @onclick="GoToCheckout" class="btn btn-dark">Checkout</a>
+        </div>
+    </div>
+
+    <CartSummary IsEditable="true"/>
+}
 
 
 

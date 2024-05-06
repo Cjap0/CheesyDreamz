@@ -5,13 +5,23 @@
 @inject ShoppingCart ShoppingCart
 @inject NavigationManager NavigationManager
 @inject ProtectedSessionStorage ProtectedSessionStore
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using MyCheeseShop.Model
 @using MyCheeseShop.Context
 
 
-@code {
-    
 
+@code {
+    private User user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var username = authState!.User!.Identity!.Name!;
+        user = UserProvider.GetUserByUsername(username)!;
+    }
+    
 
 }

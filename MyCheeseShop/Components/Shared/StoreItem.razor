@@ -4,23 +4,45 @@
 @inject ShoppingCart ShoppingCart
 
 
-<div class="card mb-3" style="width: 18rem;">
-    <link rel="stylesheet" href="Store.css">
-    <img src="/Img/Cheeses/@Cheese.ImageUrl" class="card-img-top" alt="...">
-    <div class="card-body">
-        <span class="badge rounded-pill text-bg-primary">@Cheese.Type</span> <span class="badge rounded-pill text-bg-danger"> @Cheese.Strength</span>
-        
-        <h5 class="card-title">@Cheese.Name £@Cheese.Price</h5>
+<div class="card h-100">
+    <img src="/img/cheeses/@Cheese.ImageUrl" class="card-img-top p-1" alt="@Cheese.Name" onerror="this.onerror = null; this.src='/img/no_cheese.png'">
+    <div class="card-body d-flex flex-column">
+        <link rel="stylesheet" href="Store.css">
+        <h5>
+            <span class="badge bg-secondary">@Cheese.Type</span>
+            <span class="badge bg-dark">@Cheese.Strength</span>
+        </h5>
+        <div class="d-flex flex-column flex-sm-row justify-content-between">
+            <h5 class="card-title">@Cheese.Name</h5>
+            <h5><span class="badge bg-danger">@Cheese.Price.ToString("C")</span></h5>
+        </div>
         <p class="card-text">@Cheese.Description</p>
-        <a href="#" class="btn btn-success">Add to Cart</a>
-        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Quantity
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">100g</a></li>
-            <li><a class="dropdown-item" href="#">200g</a></li>
-            <li><a class="dropdown-item" href="#">300g</a></li>
-        </ul>
+        <div class="mt-auto">
+            <EditForm Model="quantity" OnSubmit="AddToCart">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <InputSelect class="form-select w-100" @bind-Value="quantity" required>
+                            @for (var i = 1; i <= 5; i++)
+                            {
+                                <option value="@i">@(i * 100)g</option>
+                            }
+                        </InputSelect>
+                    </div>
+                    <div class="col-lg-6 col-12 mt-lg-0 mt-1">
+                        <button class="position-relative w-100">
+                            Add to cart
+                            @if (ShoppingCart.GetQuantity(Cheese) > 0)
+                            {
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    @(ShoppingCart.GetQuantity(Cheese) * 100)g
+                                    <span class="visually-hidden">@Cheese.Name in shopping cart</span>
+                                </span>
+                            }
+                        </button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
     </div>
 </div>
 

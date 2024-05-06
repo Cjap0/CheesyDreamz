@@ -73,6 +73,7 @@
 
         public int GetQuantity(Cheese cheese)
         {
+            //return the quantity of the cheese in the cart
             var item = _items.FirstOrDefault(item => item.Cheese.Id == cheese.Id); ;
             return item?.Quantity ?? 0;
         }
