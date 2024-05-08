@@ -3,169 +3,63 @@ html {
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background-image: url("https://www.realsimple.com/thmb/uIJ_VB-o5bVwuzaaEV6c5h_bXkM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/types-of-cheeses-2000-0dbfa6a010134a05936b784517486bb2.jpg");
-    background-color: #cccccc;
+    --s: 25vmin;
+    --p: calc(var(--s) / 2);
+    --c1: #d9d900; /* Darker yellow */
+    --c2: #4d8bb3; /* Darker dodgerblue */
+    --c3: #99b3cc; /* Darker lightblue */
+    --bg: var(--c3);
+    --d: 8000ms; /* Slower animation */
+    --e: cubic-bezier(0.76, 0, 0.24, 1);
+    background-color: var(--bg);
+    background-image: linear-gradient(45deg, var(--c1) 25%, transparent 25%), linear-gradient(-45deg, var(--c1) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--c2) 75%), linear-gradient(-45deg, transparent 75%, var(--c2) 75%);
+    background-size: var(--s) var(--s);
+    background-position: calc(var(--p) * 1) calc(var(--p) * 0), calc(var(--p) * -1) calc(var(--p) * 1), calc(var(--p) * 1) calc(var(--p) * -1), calc(var(--p) * -1) calc(var(--p) * 0);
+    animation: color var(--d) var(--e) infinite, position var(--d) var(--e) infinite;
 }
 
-.login-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    padding: 40px;
-    transform: translate(-50%, -50%);
-    background: rgba(0,0,0,.5);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0,0,0,.6);
-    border-radius: 10px;
+@keyframes color {
+    0%, 25% {
+        --bg: var(--c3);
+    }
+
+    26%, 50% {
+        --bg: var(--c1);
+    }
+
+    51%, 75% {
+        --bg: var(--c3);
+    }
+
+    76%, 100% {
+        --bg: var(--c2);
+    }
 }
 
-    .login-box h2 {
-        margin: 0 0 30px;
-        padding: 0;
-        color: #fff;
-        text-align: center;
-    }
-
-    .login-box .user-box {
-        position: relative;
-    }
-
-        .login-box .user-box input {
-            width: 100%;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #fff;
-            margin-bottom: 30px;
-            border: none;
-            border-bottom: 1px solid #fff;
-            outline: none;
-            background: transparent;
-        }
-
-        .login-box .user-box label {
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #fff;
-            pointer-events: none;
-            transition: .5s;
-        }
-
-        .login-box .user-box input:focus ~ label,
-        .login-box .user-box input:valid ~ label {
-            top: -20px;
-            left: 0;
-            color: yellow; /* Change blue color to yellow */
-            font-size: 12px;
-        }
-
-    .login-box form a {
-        position: relative;
-        display: inline-block;
-        padding: 10px 20px;
-        color: yellow; /* Change blue color to yellow */
-        font-size: 16px;
-        text-decoration: none;
-        text-transform: uppercase;
-        overflow: hidden;
-        transition: .5s;
-        margin-top: 40px;
-        letter-spacing: 4px;
-    }
-
-    .login-box a:hover {
-        background: yellow; /* Change blue color to yellow */
-        color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 5px yellow, 0 0 25px yellow, 0 0 50px yellow, 0 0 100px yellow;
-    }
-
-    .login-box a span {
-        position: absolute;
-        display: block;
-    }
-
-        .login-box a span:nth-child(1) {
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, yellow);
-            animation: btn-anim1 1s linear infinite;
-        }
-
-@keyframes btn-anim1 {
+@keyframes position {
     0% {
-        left: -100%;
+        background-position: calc(var(--p) * 1) calc(var(--p) * 0), calc(var(--p) * -1) calc(var(--p) * 1), calc(var(--p) * 1) calc(var(--p) * -1), calc(var(--p) * -1) calc(var(--p) * 0);
     }
 
-    50%,100% {
-        left: 100%;
-    }
-}
-
-.login-box a span:nth-child(2) {
-    top: -100%;
-    right: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(180deg, transparent, yellow);
-    animation: btn-anim2 1s linear infinite;
-    animation-delay: .25s
-}
-
-@keyframes btn-anim2 {
-    0% {
-        top: -100%;
+    25% {
+        background-position: calc(var(--p) * 1) calc(var(--p) * 4), calc(var(--p) * -1) calc(var(--p) * 5), calc(var(--p) * 1) calc(var(--p) * 3), calc(var(--p) * -1) calc(var(--p) * 4);
     }
 
-    50%,100% {
-        top: 100%;
+    50% {
+        background-position: calc(var(--p) * 3) calc(var(--p) * 8), calc(var(--p) * -3) calc(var(--p) * 9), calc(var(--p) * 2) calc(var(--p) * 7), calc(var(--p) * -2) calc(var(--p) * 8);
+    }
+
+    75% {
+        background-position: calc(var(--p) * 3) calc(var(--p) * 12), calc(var(--p) * -3) calc(var(--p) * 13), calc(var(--p) * 2) calc(var(--p) * 11), calc(var(--p) * -2) calc(var(--p) * 12);
+    }
+
+    100% {
+        background-position: calc(var(--p) * 5) calc(var(--p) * 16), calc(var(--p) * -5) calc(var(--p) * 17), calc(var(--p) * 5) calc(var(--p) * 15), calc(var(--p) * -5) calc(var(--p) * 16);
     }
 }
 
-.login-box a span:nth-child(3) {
-    bottom: 0;
-    right: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(270deg, transparent, yellow);
-    animation: btn-anim3 1s linear infinite;
-    animation-delay: .5s
-}
-
-@keyframes btn-anim3 {
-    0% {
-        right: -100%;
-    }
-
-    50%,100% {
-        right: 100%;
-    }
-}
-
-.login-box a span:nth-child(4) {
-    bottom: -100%;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(360deg, transparent, yellow);
-    animation: btn-anim4 1s linear infinite;
-    animation-delay: .75s
-}
-
-@keyframes btn-anim4 {
-    0% {
-        bottom: -100%;
-    }
-
-    50%,100% {
-        bottom: 100%;
+@media (prefers-reduced-motion) {
+    body {
+        animation: none;
     }
 }
