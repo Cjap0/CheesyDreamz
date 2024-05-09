@@ -7,10 +7,9 @@
 <div class="card h-100">
     <img src="/img/cheeses/@Cheese.ImageUrl" class="card-img-top p-1" alt="@Cheese.Name" onerror="this.onerror = null; this.src='/img/no_cheese.png'">
     <div class="card-body d-flex flex-column">
-        <link rel="stylesheet" href="Store.css">
         <h5>
-            <span class="badge bg-secondary">@Cheese.Type</span>
-            <span class="badge bg-dark">@Cheese.Strength</span>
+            <span class="badge bg-warning">@Cheese.Type</span>
+            <span class="badge bg-warning">@Cheese.Strength</span>
         </h5>
         <div class="d-flex flex-column flex-sm-row justify-content-between">
             <h5 class="card-title">@Cheese.Name</h5>
@@ -29,7 +28,8 @@
                         </InputSelect>
                     </div>
                     <div class="col-lg-6 col-12 mt-lg-0 mt-1">
-                        <button class="position-relative w-100">
+                        <link rel="stylesheet" href="StoreItem.css">
+                        <button class="btn btn-warning position-relative w-100">
                             Add to cart
                             @if (ShoppingCart.GetQuantity(Cheese) > 0)
                             {

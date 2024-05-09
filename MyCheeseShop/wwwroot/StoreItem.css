@@ -1,0 +1,9 @@
+﻿.btn.btn-warning {
+    font-weight: bold;
+    color: black;
+}
+
+body {
+    background-color: #ffffcc; /* Light yellow */
+    /* Add other styles as needed */
+}
