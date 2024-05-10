@@ -7,3 +7,10 @@ body {
     background-color: #ffffcc; /* Light yellow */
     /* Add other styles as needed */
 }
+
+card {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Adjust values as needed */
+    padding: 20px;
+    background-color: #ffffff; /* Background color of the card */
+    border-radius: 10px; /* Optional: Rounded corners for the card */
+}

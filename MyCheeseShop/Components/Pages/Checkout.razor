@@ -1,25 +1,72 @@
-﻿@page "/Checkout"
+﻿@page "/checkout"
 
-@inject UserProvider UserProvider
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using MyCheeseShop.Components.Shared
+@using MyCheeseShop.Context
+@using MyCheeseShop.Model
+@using System.ComponentModel.DataAnnotations
+@attribute [Authorize]
+
 @inject OrderProvider OrderProvider
+@inject UserProvider UserProvider
 @inject ShoppingCart ShoppingCart
 @inject NavigationManager NavigationManager
 @inject ProtectedSessionStorage ProtectedSessionStore
 @inject AuthenticationStateProvider AuthenticationStateProvider
-@attribute [Authorize]
-@using Microsoft.AspNetCore.Authorization
-@using Microsoft.AspNetCore.Components.Authorization
-@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
-@using MyCheeseShop.Model
-@using MyCheeseShop.Context
-@using System.ComponentModel.DataAnnotations
 
 
+<h3>Checkout</h3>
+<div class="card mb-1">
+    <div class="card-body bg-light">
+        <h4 class="card-title">Order Summary</h4>
+        <CartSummary />
+    </div>
+</div>
+
+<style>
+    .card.mb-3 {
+        margin-bottom: 40px; /* Adjust the value as needed */
+    }
+</style>
+
+<EditForm EditContext="editContext" OnValidSubmit="MakePayment">
+    <DataAnnotationsValidator/>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="CheckoutPage.css">
+    <form class="credit-card">
+     <div class="card h-100 bg-light">
+      <div class="row g-3">
+        <div class="col-md-6">
+            <label for="name" class="form-label">Name</label>
+            <InputText class="form-control" placeholder="First and Last name.." @bind-Value="paymentDetails.NameOnCard"></InputText>
+        </div>
+        <div class="col-md-6">
+            <label for="cardnumber" class="form-label">CardNumber</label>
+            <InputText class="form-control" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" ></InputText>
+        </div>
+        <div class="col-md-5">
+            <label for="expirydate" class="form-label">ExpiryDate</label>
+            <InputText class="form-control" placeholder="00/00" @bind-Value="paymentDetails.ExpiryDate"></InputText>
+        </div>
+        <div class="col-md-3">
+            <label for="securitycode" class="form-label">SecurityCode</label>
+            <InputText class="form-control" placeholder="000" @bind-Value="paymentDetails.SecurityCode"></InputText>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Pay</button>
+        </div>
+      </div>
+     </div>
+    </form>
+</EditForm>
 
 @code {
     private PaymentDetails paymentDetails;
     private User user;
     private bool isPaying;
+    private EditContext editContext;
 
     private sealed class PaymentDetails
     {
@@ -48,6 +95,9 @@
 
     protected override async Task OnInitializedAsync()
     {
+        paymentDetails = new PaymentDetails();
+        editContext = new EditContext(paymentDetails);
+
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var username = authState!.User!.Identity!.Name!;
         user = UserProvider.GetUserByUsername(username)!;
@@ -62,4 +112,8 @@
         StateHasChanged();
     }
 
+    private string GetFormattedAddress(User user)
+    {
+        return $"{user.Address}{Environment.NewLine}{user.City}{Environment.NewLine}{user.PostCode}";
+    }
 }
