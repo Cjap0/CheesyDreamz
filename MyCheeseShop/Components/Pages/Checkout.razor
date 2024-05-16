@@ -17,50 +17,71 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 
+
+
 <h3>Checkout</h3>
-<div class="card mb-1">
-    <div class="card-body bg-light">
+
+<div class="card mb-4">
+    <div class="card-body bg-light-yellow">
         <h4 class="card-title">Order Summary</h4>
         <CartSummary />
     </div>
 </div>
 
-<style>
-    .card.mb-3 {
-        margin-bottom: 40px; /* Adjust the value as needed */
-    }
-</style>
-
 <EditForm EditContext="editContext" OnValidSubmit="MakePayment">
-    <DataAnnotationsValidator/>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="CheckoutPage.css">
+    <DataAnnotationsValidator />
+
+    <div class="card h-100 shadow rounded mb-4">
+        <div class="card-body bg-light-yellow">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Name</label>
+                    <Input class="form-control" placeholder="Name" Value="@GetFormattedName(user)" disabled />
+                </div>
+                <div class="col-md-6">
+                    <label for="address" class="form-label">Address</label>
+                    <Input class="form-control" placeholder="Address" Value="@GetFormattedAddress(user)" disabled />
+                </div>
+                <div class="col-md-5">
+                    <label for="email" class="form-label">Email</label>
+                    <Input class="form-control" placeholder="Email" Value="@user.Email" disabled />
+                </div>
+            </div>
+        </div>
+    </div>
+
     <form class="credit-card">
-     <div class="card h-100 bg-light">
-      <div class="row g-3">
-        <div class="col-md-6">
-            <label for="name" class="form-label">Name</label>
-            <InputText class="form-control" placeholder="First and Last name.." @bind-Value="paymentDetails.NameOnCard"></InputText>
+        <div class="card h-100 shadow rounded mb-4">
+            <div class="card-body bg-light-yellow">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="nameOnCard" class="form-label">Name</label>
+                        <InputText class="form-control" id="nameOnCard" placeholder="First and Last name.." @bind-Value="paymentDetails.NameOnCard"></InputText>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="cardNumber" class="form-label">Card Number</label>
+                        <InputText class="form-control" id="cardNumber" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber"></InputText>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="expiryDate" class="form-label">Expiry Date</label>
+                        <InputText class="form-control" id="expiryDate" placeholder="MM/YY" @bind-Value="paymentDetails.ExpiryDate"></InputText>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="securityCode" class="form-label">Security Code</label>
+                        <InputText class="form-control" id="securityCode" placeholder="CVV" @bind-Value="paymentDetails.SecurityCode"></InputText>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">Pay</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-            <label for="cardnumber" class="form-label">CardNumber</label>
-            <InputText class="form-control" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" ></InputText>
-        </div>
-        <div class="col-md-5">
-            <label for="expirydate" class="form-label">ExpiryDate</label>
-            <InputText class="form-control" placeholder="00/00" @bind-Value="paymentDetails.ExpiryDate"></InputText>
-        </div>
-        <div class="col-md-3">
-            <label for="securitycode" class="form-label">SecurityCode</label>
-            <InputText class="form-control" placeholder="000" @bind-Value="paymentDetails.SecurityCode"></InputText>
-        </div>
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-primary w-100">Pay</button>
-        </div>
-      </div>
-     </div>
     </form>
 </EditForm>
+
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="CheckoutPage.css">
+
 
 @code {
     private PaymentDetails paymentDetails;
@@ -115,5 +136,10 @@
     private string GetFormattedAddress(User user)
     {
         return $"{user.Address}{Environment.NewLine}{user.City}{Environment.NewLine}{user.PostCode}";
+    }
+
+    private string GetFormattedName(User user)
+    {
+        return $"{user.FirstName} {user.LastName}";
     }
 }

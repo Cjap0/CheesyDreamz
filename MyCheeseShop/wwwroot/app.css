@@ -1,3 +1,8 @@
+body {
+    background-color: #ffffcc;
+}
+
+
 h1:focus {
     outline: none;
 }

@@ -1,10 +1,147 @@
-﻿main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 50px;
+﻿
+To update the background color of the cards and ensure the entire design remains professional, we'll set the background color to #ffffcc for the relevant elements. Here's the updated version of your HTML and CSS:
+
+HTML & Blazor Code
+razor
+Copy code
+@page "/checkout"
+@using YourAppNamespace.Models
+
+<h3 > Checkout</h3 >
+
+<div class="card mb-4" >
+<div class="card-body bg-light-yellow" >
+<h4 class="card-title" > Order Summary</h4 >
+<CartSummary / >
+</div >
+</div >
+
+<EditForm EditContext="editContext" OnValidSubmit="MakePayment" >
+<DataAnnotationsValidator / >
+
+<div class="card h-100 shadow rounded mb-4" >
+<div class="card-body bg-light-yellow" >
+<div class="row g-3" >
+<div class="col-md-6" >
+<label for="name" class="form-label" > Name</label >
+<Input class="form-control" placeholder="Name" Value="@GetFormattedName(user)" disabled / >
+</div >
+<div class="col-md-6" >
+<label for="address" class="form-label" > Address</label >
+<Input class="form-control" placeholder="Address" Value="@GetFormattedAddress(user)" disabled / >
+</div >
+<div class="col-md-5" >
+<label for="email" class="form-label" > Email</label >
+<Input class="form-control" placeholder="Email" Value="@user.Email" disabled / >
+</div >
+</div >
+</div >
+</div >
+
+<form class="credit-card" >
+<div class="card h-100 shadow rounded mb-4" >
+<div class="card-body bg-light-yellow" >
+<div class="row g-3" >
+<div class="col-md-6" >
+<label for="nameOnCard" class="form-label" > Name</label >
+<InputText class="form-control" id="nameOnCard" placeholder="First and Last name.." @bind-Value="paymentDetails.NameOnCard" > </InputText >
+</div >
+<div class="col-md-6" >
+<label for="cardNumber" class="form-label" > Card Number</label >
+<InputText class="form-control" id="cardNumber" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" > </InputText >
+</div >
+<div class="col-md-5" >
+<label for="expiryDate" class="form-label" > Expiry Date</label >
+<InputText class="form-control" id="expiryDate" placeholder="MM/YY" @bind-Value="paymentDetails.ExpiryDate" > </InputText >
+</div >
+<div class="col-md-3" >
+<label for="securityCode" class="form-label" > Security Code</label >
+<InputText class="form-control" id="securityCode" placeholder="CVV" @bind-Value="paymentDetails.SecurityCode" > </InputText >
+</div >
+<div class="col-md-4 d-flex align-items-end" >
+<button type="submit" class="btn btn-primary w-100" > Pay</button >
+</div >
+</div >
+</div >
+</div >
+</form >
+</EditForm >
+
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css' >
+<link rel="stylesheet" href="CheckoutPage.css" >
+CSS (CheckoutPage.css)
+css
+Copy code
+body {
     font-family: 'Roboto', sans-serif;
 }
 
+h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+    .form-control::placeholder {
+        color: #aaa;
+        font-size: 0.9rem;
+    }
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+.shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mb-4 {
+    margin-bottom: 40px; /* Adds space between the cards */
+}
+
+.d-flex.align-items-end {
+    margin-top: auto; /* Ensures the button is aligned at the bottom */
+}
+
+.bg-light-yellow {
+    background-color: #ffffcc; /* Light yellow background color */
+}
+
+@media (max-width: 576px) {
+    .credit-card {
+        margin: 20px;
+    }
+}
