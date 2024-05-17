@@ -1,4 +1,4 @@
-﻿@page "/checkout"
+﻿ "/checkout"
 
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
@@ -8,7 +8,6 @@
 @using MyCheeseShop.Model
 @using System.ComponentModel.DataAnnotations
 @attribute [Authorize]
-
 @inject OrderProvider OrderProvider
 @inject UserProvider UserProvider
 @inject ShoppingCart ShoppingCart
@@ -70,10 +69,20 @@
                         <label for="securityCode" class="form-label">Security Code</label>
                         <InputText class="form-control" id="securityCode" placeholder="CVV" @bind-Value="paymentDetails.SecurityCode"></InputText>
                     </div>
-                    <div class="col-md-4 d-flex align-items-end">
-                        <button @ class="btn btn-primary">Pay</a>
-                    </div>
+                   
                 </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-3">
+            <div class="col-lg-6 col-12 d-flex justify-content-center">
+                <button @onclick="GoToCart" class="btn btn-warning mr-2">Back to Cart</button>
+                <button type="submit" class="btn btn-danger d-flex align-items-center" style="margin-left: 16px">
+                    <span>Pay and continue</span>
+                    @if (isPaying)
+                    {
+                        <span class="spinner-grow spinner-grow-sm float-end" style="margin-left: 4px" aria-hidden="true"></span>
+                    }
+                </button>
             </div>
         </div>
     </form>
@@ -110,7 +119,7 @@
 
         await OrderProvider.CreateOrder(user, ShoppingCart.GetItems());
         ShoppingCart.clear();
-        NavigationManager.NavigateTo("/thank-you");
+        NavigationManager.NavigateTo("/Thankyou");
     } 
 
 
@@ -143,8 +152,9 @@
         return $"{user.FirstName} {user.LastName}";
     }
 
-    private void GoToThankyou()
+    private void GoToCart()
     {
-        NavigationManager.NavigateTo("/Thankyou");
+        NavigationManager.NavigateTo("/cart");
     }
+
 }
