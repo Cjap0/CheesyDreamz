@@ -1,79 +1,7 @@
 ﻿
-To update the background color of the cards and ensure the entire design remains professional, we'll set the background color to #ffffcc for the relevant elements. Here's the updated version of your HTML and CSS:
-
-HTML & Blazor Code
-razor
-Copy code
-@page "/checkout"
-@using YourAppNamespace.Models
-
-<h3 > Checkout</h3 >
-
-<div class="card mb-4" >
-<div class="card-body bg-light-yellow" >
-<h4 class="card-title" > Order Summary</h4 >
-<CartSummary / >
-</div >
-</div >
-
-<EditForm EditContext="editContext" OnValidSubmit="MakePayment" >
-<DataAnnotationsValidator / >
-
-<div class="card h-100 shadow rounded mb-4" >
-<div class="card-body bg-light-yellow" >
-<div class="row g-3" >
-<div class="col-md-6" >
-<label for="name" class="form-label" > Name</label >
-<Input class="form-control" placeholder="Name" Value="@GetFormattedName(user)" disabled / >
-</div >
-<div class="col-md-6" >
-<label for="address" class="form-label" > Address</label >
-<Input class="form-control" placeholder="Address" Value="@GetFormattedAddress(user)" disabled / >
-</div >
-<div class="col-md-5" >
-<label for="email" class="form-label" > Email</label >
-<Input class="form-control" placeholder="Email" Value="@user.Email" disabled / >
-</div >
-</div >
-</div >
-</div >
-
-<form class="credit-card" >
-<div class="card h-100 shadow rounded mb-4" >
-<div class="card-body bg-light-yellow" >
-<div class="row g-3" >
-<div class="col-md-6" >
-<label for="nameOnCard" class="form-label" > Name</label >
-<InputText class="form-control" id="nameOnCard" placeholder="First and Last name.." @bind-Value="paymentDetails.NameOnCard" > </InputText >
-</div >
-<div class="col-md-6" >
-<label for="cardNumber" class="form-label" > Card Number</label >
-<InputText class="form-control" id="cardNumber" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" > </InputText >
-</div >
-<div class="col-md-5" >
-<label for="expiryDate" class="form-label" > Expiry Date</label >
-<InputText class="form-control" id="expiryDate" placeholder="MM/YY" @bind-Value="paymentDetails.ExpiryDate" > </InputText >
-</div >
-<div class="col-md-3" >
-<label for="securityCode" class="form-label" > Security Code</label >
-<InputText class="form-control" id="securityCode" placeholder="CVV" @bind-Value="paymentDetails.SecurityCode" > </InputText >
-</div >
-<div class="col-md-4 d-flex align-items-end" >
-<button type="submit" class="btn btn-primary w-100" > Pay</button >
-</div >
-</div >
-</div >
-</div >
-</form >
-</EditForm >
-
-<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css' >
-<link rel="stylesheet" href="CheckoutPage.css" >
-CSS (CheckoutPage.css)
-css
-Copy code
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: #ffffcc;
 }
 
 h3 {
@@ -137,7 +65,7 @@ h3 {
 }
 
 .bg-light-yellow {
-    background-color: #ffffcc; /* Light yellow background color */
+    background-color: lightgrey; /* This is the hex code for a bright yellow color */
 }
 
 @media (max-width: 576px) {

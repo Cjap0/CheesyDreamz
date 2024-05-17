@@ -8,7 +8,7 @@ namespace MyCheeseShop.Context
     {
         private readonly DatabaseContext _context;
         private readonly UserManager<User> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;    
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public DatabaseSeeder(DatabaseContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -78,6 +78,7 @@ namespace MyCheeseShop.Context
                 new Cheese { Name = "Ricotta", Type = "Soft", Description = "Creamy and slightly sweet", Strength = "Mild", Price = 7.49m, ImageUrl="Ricotta.jfif" },
             ];
         }
+
 
     }
 }

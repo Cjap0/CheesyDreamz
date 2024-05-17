@@ -71,7 +71,7 @@
                         <InputText class="form-control" id="securityCode" placeholder="CVV" @bind-Value="paymentDetails.SecurityCode"></InputText>
                     </div>
                     <div class="col-md-4 d-flex align-items-end">
-                        <button type="submit" class="btn btn-primary w-100">Pay</button>
+                        <button @ class="btn btn-primary">Pay</a>
                     </div>
                 </div>
             </div>
@@ -141,5 +141,10 @@
     private string GetFormattedName(User user)
     {
         return $"{user.FirstName} {user.LastName}";
+    }
+
+    private void GoToThankyou()
+    {
+        NavigationManager.NavigateTo("/Thankyou");
     }
 }
